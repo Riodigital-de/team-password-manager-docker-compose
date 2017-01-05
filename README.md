@@ -42,7 +42,7 @@ It features:
 ## Contents of .env ##
 ### app ###
 * **app_dockerfile**: Tells docker-compose which dockerfile to use when building the app container. The default is 'production.Dockerfile'.
-* **app_mysql_host**: Tells teampasswordmanager which Database to use.
+* **app_db_host**: Tells teampasswordmanager which Database to use.
 
 ### db ###
 * **db_root_password**: The mysql root users password
@@ -51,5 +51,5 @@ It features:
 * **db_password**: The password for the teampasswordmanager mysql user
 
 ### proxy ###
-* **app_dockerfile**: Tells docker-compose which dockerfile to use when building the proxy container. The default is 'production.Dockerfile'.
+* **proxy_dockerfile**: Tells docker-compose which dockerfile to use when building the proxy container. The default is 'production.Dockerfile'.
 * **proxy_domain**: the domain under which your teampasswordmanager instance should be reachable, e.g. YOUR.TEAMPASSWORD.DOMAIN.com. Please make sure to update the DNS records for this domain to point to the machine you want to run teampasswordmanager on.
