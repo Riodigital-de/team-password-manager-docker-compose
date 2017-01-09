@@ -45,5 +45,10 @@ services:
       - app
     volumes:
       - ./config/proxy/nginx.conf:/etc/nginx/nginx.conf.template
+      - ./data/proxy/lets-etc/:/etc/letsencrypt/
+      - ./data/proxy/lets-var-lib/:/var/lib/letsencrypt/
+      - ./data/proxy/nginx-root/:/usr/share/nginx/html/
     environment:
+      - VIRTUAL_HOST=${proxy_domain}
+      - ADMIN_EMAIL=${proxy_admin_email}
       - DOMAIN=${proxy_domain}
