@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# copy template gnix conf over actual conf
+# copy template ngnix conf over actual conf
 cp /etc/nginx/nginx.conf.template /etc/nginx/nginx.conf
 
 # replace env DOMAIN every time the container is started

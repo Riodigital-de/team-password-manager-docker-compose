@@ -6,8 +6,10 @@ services:
     build:
       context: ./build/app
       dockerfile: ${app_dockerfile}
+    depends_on:
+      - db
     environment:
-      - MYSQL_HOST=${app_db_host}
+      - MYSQL_HOST=${app_mysql_host}
       - MYSQL_USER=${db_user}
       - MYSQL_PASSWORD=${db_password}
       - MYSQL_DATABASE=${db_name}
@@ -19,6 +21,16 @@ services:
       - ./data/app/:/var/www/app/
     ports:
       - 9000
+
+  db:
+    image: mariadb:10
+    volumes:
+      - /var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${db_root_password}
+      - MYSQL_DATABASE=${db_name}
+      - MYSQL_USER=${db_user}
+      - MYSQL_PASSWORD=${db_password}
 
   proxy:
     build:
@@ -33,14 +45,10 @@ services:
       - app
     volumes:
       - ./config/proxy/nginx.conf:/etc/nginx/nginx.conf.template
+      - ./data/proxy/lets-etc/:/etc/letsencrypt/
+      - ./data/proxy/lets-var-lib/:/var/lib/letsencrypt/
+      - ./data/proxy/nginx-root/:/usr/share/nginx/html/
     environment:
+      - VIRTUAL_HOST=${proxy_domain}
+      - ADMIN_EMAIL=${proxy_admin_email}
       - DOMAIN=${proxy_domain}
-    networks:
-      - default
-      - ambassador
-
-networks:
-  default:
-  ambassador:
-    external:
-      name: ambassador
