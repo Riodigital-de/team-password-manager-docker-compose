@@ -2,26 +2,9 @@ version: '2'
 
 services:
 
-  app:
-    depends_on:
-      - db
-
-  proxy:
-    ports:
-      - 80:80
-      - 443:443
-
   adminer:
     image: clue/adminer
     ports:
       - 8888:80
 
-  db:
-    image: mariadb:10
-    volumes:
-      - /var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${db_root_password}
-      - MYSQL_DATABASE=${db_name}
-      - MYSQL_USER=${db_user}
-      - MYSQL_PASSWORD=${db_password}
+
