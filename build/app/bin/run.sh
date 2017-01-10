@@ -7,6 +7,7 @@ if [ ! -e /var/www/app/index.php ]; then
   unzip -d /tmp/ /tmp/app.zip
   mv /tmp/teampasswordmanager_*/* /var/www/app/
   rm -rf /tmp/teampasswordmanager_*
+  chown -R www-data:www-data /var/www/app
 fi
 
 cp /var/www/app/config.template /var/www/app/config.php
